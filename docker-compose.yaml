@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  api-service:
+    build:
+      context: api_service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - zookeeper
+      - kafka
+      - postgres
+    env_file:
+      - api_service/api_service.env
+    networks:
+      - docker-network
+
+  data-service:
+    build:
+      context: data_service
+      dockerfile: Dockerfile
+    depends_on:
+      - zookeeper
+      - kafka
+      - postgres
+    env_file:
+      - data_service/data_service.env
+    networks:
+      - docker-network
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    env_file:
+      - postgres.env
+    networks:
+      - docker-network
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    #to fix library initialization failed - unable to allocate file descriptor table - out of memory
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    networks:
+      - docker-network
+
+  kafka:
+    image: wurstmeister/kafka
+    env_file:
+      - kafka.env
+    depends_on:
+      - zookeeper
+    networks:
+      - docker-network
+
+volumes:
+  data:
+
+networks:
+  docker-network:
+    driver: bridge
