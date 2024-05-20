@@ -1,6 +1,6 @@
 package com.example.api_service.controller;
 
-import com.example.api_service.model.Test;
+import com.example.api_service.dto.TestDto;
 import com.example.api_service.producer.TestProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ public class TestController {
     private final TestProducer testProducer;
 
     @PostMapping
-    public void sendMessage(@RequestBody Test test) {
+    public void sendMessage(@RequestBody TestDto test) {
         testProducer.sendMessage(test);
     }
 }

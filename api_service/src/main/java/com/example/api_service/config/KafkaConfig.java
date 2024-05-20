@@ -14,4 +14,20 @@ public class KafkaConfig {
                 .partitions(1)
                 .build();
     }
+
+    @Bean
+    public NewTopic movieTopic() {
+        return TopicBuilder
+                .name("movie-topic")
+                .partitions(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic reviewTopic() {
+        return TopicBuilder
+                .name("review-topic")
+                .partitions(1)
+                .build();
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.api_service.producer;
 
+import com.example.api_service.dto.MovieDto;
 import com.example.api_service.dto.TestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -11,14 +12,14 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class TestProducer {
+public class MovieProducer {
     private final KafkaTemplate<String, String> template;
     private final ObjectMapper objectMapper;
 
     @SneakyThrows
-    public void sendMessage(TestDto test) {
-        String data = objectMapper.writeValueAsString(test);
+    public void sendMessage(MovieDto movieDto) {
+        String data = objectMapper.writeValueAsString(movieDto);
         String key = UUID.randomUUID().toString();
-        template.send("test-topic", key, data);
+        template.send("movie-topic", key, data);
     }
 }
