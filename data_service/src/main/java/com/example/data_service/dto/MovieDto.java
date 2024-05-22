@@ -1,5 +1,6 @@
 package com.example.data_service.dto;
 
+import com.example.data_service.model.Review;
 import jakarta.annotation.Nullable;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,4 +17,7 @@ public class MovieDto {
     private Long id;
     private String title;
     private String genre;
+
+    @Nullable
+    private List<Review> reviewDtoList;
 }

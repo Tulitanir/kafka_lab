@@ -1,6 +1,9 @@
 package com.example.data_service.controller;
 
+import com.example.data_service.dto.MovieComment;
 import com.example.data_service.dto.MovieDto;
+import com.example.data_service.dto.MovieGenre;
+import com.example.data_service.dto.MovieRating;
 import com.example.data_service.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +32,20 @@ public class MovieController {
     @GetMapping("/all")
     public ResponseEntity<List<MovieDto>> getAll() {
         return ResponseEntity.ok(movieService.getAll());
+    }
+
+    @GetMapping("/topRating")
+    public ResponseEntity<List<MovieRating>> topRating() {
+        return ResponseEntity.ok(movieService.getTop5HighRatedMovies());
+    }
+
+    @GetMapping("/topComment")
+    public ResponseEntity<List<MovieComment>> topComments() {
+        return ResponseEntity.ok(movieService.getTopPopularMovies());
+    }
+
+    @GetMapping("/genreCount")
+    public ResponseEntity<List<MovieGenre>> genreCount() {
+        return ResponseEntity.ok(movieService.getCountMoviesByGenre());
     }
 }

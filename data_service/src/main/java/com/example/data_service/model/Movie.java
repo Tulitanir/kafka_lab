@@ -19,6 +19,6 @@ public class Movie {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @OneToMany
+    @OneToMany(mappedBy = "movieId")
     private List<Review> reviews;
 }

@@ -1,6 +1,9 @@
 package com.example.api_service.controller;
 
+import com.example.api_service.dto.MovieComment;
 import com.example.api_service.dto.MovieDto;
+import com.example.api_service.dto.MovieGenre;
+import com.example.api_service.dto.MovieRating;
 import com.example.api_service.producer.MovieProducer;
 import com.example.api_service.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +39,20 @@ public class MovieController {
     public ResponseEntity<String> addMovie(@RequestBody MovieDto movieDto) {
         movieProducer.sendMessage(movieDto);
         return ResponseEntity.ok("Сообщение отправлено");
+    }
+
+    @GetMapping("/topRating")
+    public ResponseEntity<List<MovieRating>> topRating() {
+        return ResponseEntity.ok(movieService.getTop5HighRatedMovies());
+    }
+
+    @GetMapping("/topComment")
+    public ResponseEntity<List<MovieComment>> topComments() {
+        return ResponseEntity.ok(movieService.getTopPopularMovies());
+    }
+
+    @GetMapping("/genreCount")
+    public ResponseEntity<List<MovieGenre>> genreCount() {
+        return ResponseEntity.ok(movieService.getCountMoviesByGenre());
     }
 }

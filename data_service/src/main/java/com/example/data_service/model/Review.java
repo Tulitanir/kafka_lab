@@ -1,20 +1,19 @@
 package com.example.data_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Entity
+@Entity(name = "review")
 @Getter
 @Setter
+@ToString
 public class Review {
     @Id
     @GeneratedValue
     private Long id;
     private Long movieId;
     private String text;
-    private Short rating;
+    private Long rating;
 }

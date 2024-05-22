@@ -1,7 +1,6 @@
 package com.example.api_service.producer;
 
 import com.example.api_service.dto.MovieDto;
-import com.example.api_service.dto.TestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
